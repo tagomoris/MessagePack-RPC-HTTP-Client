@@ -1,5 +1,5 @@
 {
-   "abstract" : "It's new $module",
+   "abstract" : "Perl version of msgpack-rpc-over-http (ruby) client.",
    "author" : [
       "TAGOMORI Satoshi <tagomoris@gmail.com>"
    ],
@@ -42,6 +42,8 @@
       },
       "runtime" : {
          "requires" : {
+            "Data::MessagePack" : "0",
+            "Furl" : "0",
             "perl" : "5.008005"
          }
       },
@@ -52,5 +54,16 @@
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/tagomoris/MessagePack-RPC-HTTP-Client/issues"
+      },
+      "homepage" : "https://github.com/tagomoris/MessagePack-RPC-HTTP-Client",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/tagomoris/MessagePack-RPC-HTTP-Client.git",
+         "web" : "https://github.com/tagomoris/MessagePack-RPC-HTTP-Client"
+      }
+   },
    "version" : "0.01"
 }
