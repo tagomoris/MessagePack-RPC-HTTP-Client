@@ -2,5 +2,7 @@ Revision history for Perl extension MessagePack-RPC-HTTP-Client
 
 {{$NEXT}}
 
+0.01 2013-09-18T14:28:12Z
+
     - original version
 
