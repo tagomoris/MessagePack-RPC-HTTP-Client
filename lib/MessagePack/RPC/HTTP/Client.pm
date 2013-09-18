@@ -8,7 +8,7 @@ use Carp;
 use Data::MessagePack;
 use Furl;
 
-our $VERSION = "0.01";
+our $VERSION = "0.02";
 
 my $HEADER = ["Content-Type" => "application/x-msgpack"];
 
@@ -33,16 +33,20 @@ sub new {
     $self;
 }
 
-sub call { # args: ArrayRef (for performance reason)
-    my ($self, $method, $args) = @_;
-    $self->send_request($method, $args);
+sub call {
+    my ($self, $method, @args) = @_;
+    $self->send_request($method, \@args);
 }
 
 sub send_request { # param: ArrayRef
     my ($self, $method, $param) = @_;
     my $data = $self->create_request_body($method, $param);
     # $furl->post($url :Str, $headers :ArrayRef[Str], $content :Any)
-    my $body = $self->{http_client}->post($self->{url}, $HEADER, $data)->body;
+    my $res = $self->{http_client}->post($self->{url}, $HEADER, $data);
+    unless ($res->is_success) {
+        croak "ServerError: check server log or status";
+    }
+    my $body = $res->body;
     $self->get_result($body);
 }
 
@@ -82,7 +86,7 @@ MessagePack::RPC::HTTP::Client - Perl version of msgpack-rpc-over-http (ruby) cl
 
     use MessagePack::RPC::HTTP::Client;
     my $client = MessagePack::RPC::HTTP::Client->new("http://remote.server.local/");
-    my $result = $client->call("remoteMethodName", ["param1", "param2"]);
+    my $result = $client->call("remoteMethodName", "param1", "param2");
 
 =head1 DESCRIPTION
 

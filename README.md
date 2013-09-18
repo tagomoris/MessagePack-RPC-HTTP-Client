@@ -6,7 +6,7 @@ MessagePack::RPC::HTTP::Client - Perl version of msgpack-rpc-over-http (ruby) cl
 
     use MessagePack::RPC::HTTP::Client;
     my $client = MessagePack::RPC::HTTP::Client->new("http://remote.server.local/");
-    my $result = $client->call("remoteMethodName", ["param1", "param2"]);
+    my $result = $client->call("remoteMethodName", "param1", "param2");
 
 # DESCRIPTION
 
